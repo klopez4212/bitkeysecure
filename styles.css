@@ -568,7 +568,7 @@ nav {
 }
 
 .loading-overlay .verification-container {
-    margin-top: 0px;
+    margin-top: -10px;
     position: relative;
     visibility: visible;
 }
@@ -598,6 +598,6 @@ nav {
 
 #successScreen.active {
     z-index: 3;
-    margin-top: 0px;
+    margin-top: -30px;
     position: relative;
 } 
