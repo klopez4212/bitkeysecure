@@ -81,7 +81,7 @@ a {
     max-width: 100%;
     margin: 0 auto;
     padding: 0 24px 100px;
-    min-height: calc(100vh - 114px);
+    min-height: 100vh;
     width: 100%;
     max-width: 800px;
     position: absolute;
@@ -99,6 +99,10 @@ a {
     pointer-events: all;
     visibility: visible;
     z-index: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+   
 }
 
 h1, .loading-text {
@@ -482,7 +486,6 @@ nav {
     }
 
     #successScreen .address-grid {
-        margin-top: 0;
         gap: 0px !important;
     }
 
@@ -496,6 +499,10 @@ nav {
 @media (max-width: 480px) {
     h1, .loading-text {
         font-size: 20px;
+    }
+
+    .verification-container.active {
+        padding: 0 16px 80px;
     }
 
     .code-text {
@@ -567,7 +574,6 @@ nav {
 }
 
 .loading-overlay .verification-container {
-
     position: relative;
     visibility: visible;
 }
@@ -581,6 +587,9 @@ nav {
 #mainContent {
     position: relative;
     min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -591,12 +600,21 @@ nav {
 
 #successScreen {
     z-index: 2;
-
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    padding: 0 24px;
 }
 
 #successScreen.active {
     z-index: 3;
-
-    position: relative;
+    opacity: 1;
+    visibility: visible;
 } 
