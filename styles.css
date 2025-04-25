@@ -478,10 +478,12 @@ nav {
 
     .address-grid {
         margin-top: 24px;
+        gap: 0px;
     }
 
     #successScreen .address-grid {
         margin-top: 0;
+        gap: 0px !important;
     }
 
     .success-icon {
@@ -533,6 +535,10 @@ nav {
         padding: 10px 20px;
         font-size: 13px;
         min-width: 100px;
+    }
+
+    .address-grid {
+        gap: 0px;
     }
 }
 
