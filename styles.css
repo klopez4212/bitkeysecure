@@ -515,7 +515,7 @@ nav {
 
     .separator {
         font-size: 24px;
-        margin: 0 12px;
+        margin: 0 8px;
     }
 
     #successScreen .separator {
@@ -574,6 +574,8 @@ nav {
 }
 
 #addressVerification {
+    margin-top: -40px;
+    position: relative;
  
 }
 
