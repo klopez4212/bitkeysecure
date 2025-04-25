@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        
+        .primary-button {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            background-color: #008096;
+            color: white;
+        }
+        
+        .primary-button:disabled {
+            background-color: #E6E6E6;
+            color: #ffffff;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button class="primary-button" id="normal-button">Normal Button</button>
+        <button class="primary-button" id="disabled-button" disabled>Disabled Button</button>
+        <button class="primary-button" id="toggle-button">Toggle Disabled</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('toggle-button');
+            const disabledButton = document.getElementById('disabled-button');
+            
+            console.log('Button disabled state:', disabledButton.disabled);
+            
+            toggleButton.addEventListener('click', function() {
+                disabledButton.disabled = !disabledButton.disabled;
+                console.log('Button disabled state toggled to:', disabledButton.disabled);
+            });
+        });
+    </script>
+</body>
+</html> 

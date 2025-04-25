@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Test</title>
+    <style>
+        body {
+            background-color: #1d2026;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .character-input {
+            width: 32px;
+            height: 40px;
+            background-color: #3a3d46;
+            border-radius: 4px;
+            border: none;
+            text-align: center;
+            color: white;
+            font-family: monospace;
+            font-size: 2rem;
+            margin: 0 4px;
+        }
+        .character-input.correct {
+            outline: 2px solid #00cc00 !important;
+            border: 2px solid #00cc00 !important;
+        }
+        .character-input.incorrect {
+            outline: 2px solid #ff0000 !important;
+            border: 2px solid #ff0000 !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validation Test</h1>
+    <div>
+        <input type="text" class="character-input" maxlength="1" id="test-input">
+    </div>
+    <div id="result" style="margin-top: 20px; font-size: 1.5rem;"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const testInput = document.getElementById('test-input');
+            const resultDiv = document.getElementById('result');
+            
+            // The expected character is 'g'
+            const expectedChar = 'g';
+            
+            testInput.addEventListener('input', (e) => {
+                const enteredChar = e.target.value.toLowerCase();
+                
+                // Clear existing classes
+                testInput.classList.remove('correct', 'incorrect');
+                
+                if (enteredChar) {
+                    const isCorrect = enteredChar === expectedChar;
+                    
+                    // Show result
+                    resultDiv.textContent = `Entered: "${enteredChar}", Expected: "${expectedChar}", Correct: ${isCorrect}`;
+                    
+                    // Apply direct styling with cssText for maximum override
+                    if (isCorrect) {
+                        testInput.style.cssText = "border: 3px solid #00cc00 !important; outline: 3px solid #00cc00 !important; box-shadow: 0 0 10px #00cc00 !important; background-color: #3a3d46 !important;";
+                    } else {
+                        testInput.style.cssText = "border: 3px solid #ff0000 !important; outline: 3px solid #ff0000 !important; box-shadow: 0 0 10px #ff0000 !important; background-color: #3a3d46 !important;";
+                    }
+                } else {
+                    resultDiv.textContent = '';
+                    testInput.style.cssText = "border: none !important; outline: none !important; box-shadow: none !important; background-color: #3a3d46 !important;";
+                }
+            });
+            
+            // Focus the input on load
+            setTimeout(() => testInput.focus(), 500);
+        });
+    </script>
+</body>
+</html> 

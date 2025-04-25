@@ -1,0 +1,591 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #272735;
+    color: white;
+    line-height: 1.5;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Secure Banner */
+.secure-banner {
+    background-color: #B3CCC7;
+    color: #333442;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.secure-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.lock-icon {
+    font-size: 14px;
+}
+
+.learn-more {
+    color: #1d2026;
+    text-decoration: underline;
+    margin-left: 2px;
+    font-weight: 600;
+}
+
+/* Header Banner */
+.header-banner {
+    background-color: #B3CCC7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #2a2d36;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    height: 30px;
+    width: auto;
+}
+
+/* Main Container */
+.verification-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+    min-height: calc(100vh - 114px);
+    width: 100%;
+    max-width: 800px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    visibility: hidden;
+}
+
+.verification-container.active {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+    z-index: 1;
+}
+
+h1, .loading-text {
+    font-size: 32px;
+    text-align: left;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+    max-width: 600px;
+    transition: opacity 0.3s ease;
+}
+
+/* Address Grid */
+.address-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 40px;
+    max-width: 600px;
+    align-items: left;
+    transition: all 0.3s ease;
+}
+
+/* Success screen specific grid with no width constraint */
+#successScreen .address-grid {
+    max-width: none;
+    width: auto;
+    gap: 0px !important;
+    transition: width 0.3s ease;
+    margin-top: 0;
+}
+
+.code-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1;
+    min-height: 70px;
+    transition: all 0.3s ease;
+}
+
+#successScreen .code-row {
+    min-height: 60px;
+    transition: none;
+}
+
+.code-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 30px;
+    color: white;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+#successScreen .code-text {
+    font-size: 30px;
+    transition: none;
+}
+
+.separator {
+    font-size: 34px;
+    color: #666;
+    margin: 0 40px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Success screen specific separator with reduced margin */
+#successScreen .separator {
+    margin: 0 16px;
+    font-size: 34px;
+    transition: none;
+}
+
+/* Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.character-input {
+    width: 45px;
+    height: 56px;
+    background-color: #3a3d46;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 6px;
+    letter-spacing: -0.01em;
+    padding: 0;
+    line-height: 1;
+    box-sizing: border-box;
+    vertical-align: middle;
+    outline: none;
+}
+
+/* Make sure the input has the same baseline as the text */
+.code-text, .separator, .character-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+}
+
+.character-input:focus {
+    outline: 3px solid #008096;
+    outline-offset: 0;
+}
+
+/* Make these more specific to ensure they override :focus */
+input.character-input.correct {
+    outline: 3px solid #00cc00 !important;
+    border: 2px solid #00cc00 !important;
+    box-shadow: 0 0 5px #00cc00 !important;
+}
+
+input.character-input.incorrect {
+    outline: 3px solid #ff0000 !important;
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 5px #ff0000 !important;
+    animation: shake 0.5s;
+}
+
+/* Button Container */
+.button-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #272735;
+    padding: 32px 0;
+    border-top: 1px solid#3a3d46;
+    z-index: 100;
+}
+
+/* Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 16px;
+    margin: 0 auto;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.secondary-button, .primary-button {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 140px;
+    text-align: center;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-button {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.primary-button {
+    background-color: #008096;
+    color: #ffffff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.primary-button:disabled,
+.primary-button[disabled] {
+    background-color: #E6E6E6;
+    color: #ffffff;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.primary-button:not([disabled]) {
+    background-color: #008096;
+    color: white;
+    cursor: pointer;
+    opacity: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button:hover:not(:disabled) {
+    background-color: #006b7d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.secondary-button:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+/* Header & Navigation */
+header.nav-header {
+    background-color: #0a2463;
+    color: white;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #7cdedc;
+}
+
+/* Amount Display */
+.subtitle {
+    color: #ffffffc6;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.amount-card {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px 32px;
+    margin-bottom: 40px;
+ 
+}
+
+.amount-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.amount-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.amount-values {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.amount-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.amount-sats {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: -0.01em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1, .loading-text {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+        margin-top: -8px;
+        margin-bottom: 24px;
+    }
+
+    .code-text {
+        font-size: 24px;
+    }
+
+    .character-input {
+        width: 36px;
+        height: 44px;
+        font-size: 24px;
+        margin: 0 4px;
+    }
+
+    .code-text, .separator, .character-input {
+        height: 44px;
+    }
+
+    .separator {
+        font-size: 28px;
+        margin: 0 16px;
+    }
+
+    #successScreen .separator {
+        margin: 0 12px;
+        font-size: 24px;
+    }
+
+    .amount-card {
+        padding: 16px 24px;
+        margin-bottom: 24px;
+    }
+
+    .amount-label {
+        font-size: 16px;
+    }
+
+    .amount-value {
+        font-size: 24px;
+    }
+
+    .amount-sats {
+        font-size: 14px;
+    }
+
+    .button-container {
+        padding: 24px 0;
+    }
+
+    .secondary-button, .primary-button {
+        padding: 12px 24px;
+        font-size: 14px;
+        min-width: 120px;
+    }
+
+    .verification-container {
+        padding: 0 16px 80px;
+    }
+
+    .address-grid {
+        margin-top: 24px;
+    }
+
+    #successScreen .address-grid {
+        margin-top: 0;
+    }
+
+    .success-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, .loading-text {
+        font-size: 20px;
+    }
+
+    .code-text {
+        font-size: 20px;
+    }
+
+    .character-input {
+        width: 32px;
+        height: 40px;
+        font-size: 20px;
+        margin: 0 3px;
+    }
+
+    .code-text, .separator, .character-input {
+        height: 40px;
+    }
+
+    .separator {
+        font-size: 24px;
+        margin: 0 12px;
+    }
+
+    #successScreen .separator {
+        margin: 0 8px;
+        font-size: 20px;
+    }
+
+    .amount-card {
+        padding: 12px 16px;
+    }
+
+    .amount-value {
+        font-size: 20px;
+    }
+
+    .secondary-button, .primary-button {
+        padding: 10px 20px;
+        font-size: 13px;
+        min-width: 100px;
+    }
+}
+
+.animation-container {
+    align-self: left;
+    margin-top: 0;
+    margin-bottom: 60px;
+}
+
+.success-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #272735;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+
+.loading-overlay .verification-container {
+    margin-top: -40px;
+    position: relative;
+    visibility: visible;
+}
+
+#addressVerification {
+ 
+}
+
+#mainContent {
+    position: relative;
+    min-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#mainContent.active {
+    opacity: 1;
+}
+
+#successScreen {
+    z-index: 2;
+}
+
+#successScreen.active {
+    z-index: 3;
+} 
