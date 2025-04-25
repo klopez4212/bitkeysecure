@@ -476,16 +476,16 @@
                             // Then transition all elements to their success state
                             setTimeout(() => {
                                 separators.forEach(sep => {
-                                    sep.style.margin = '0 16px';
-                                    sep.style.fontSize = '32px';
+                                    sep.style.margin = window.innerWidth <= 768 ? '0 8px' : '0 16px';
+                                    sep.style.fontSize = window.innerWidth <= 768 ? '28px' : '32px';
                                 });
                                 
                                 codeTexts.forEach(text => {
-                                    text.style.fontSize = '28px';
+                                    text.style.fontSize = window.innerWidth <= 768 ? '24px' : '28px';
                                 });
                                 
                                 codeRows.forEach(row => {
-                                    row.style.minHeight = '60px';
+                                    row.style.minHeight = window.innerWidth <= 768 ? '50px' : '60px';
                                 });
                                 
                                 if (addressGrid) {

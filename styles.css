@@ -122,16 +122,16 @@ h1, .loading-text {
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    max-width: 100%;
     margin-top: 40px;
-    max-width: 600px;
     align-items: left;
     transition: all 0.3s ease;
 }
 
 /* Success screen specific grid with no width constraint */
 #successScreen .address-grid {
-    max-width: none;
-    width: auto;
+    max-width: 100%;
+    width: 100%;
     gap: 0px !important;
     transition: width 0.3s ease;
     margin-top: 0;
@@ -139,11 +139,14 @@ h1, .loading-text {
 
 .code-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     line-height: 1;
     min-height: 70px;
     transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100%;
+    gap: 6px;
 }
 
 #successScreen .code-row {
@@ -158,6 +161,7 @@ h1, .loading-text {
     letter-spacing: -0.01em;
     line-height: 1;
     transition: all 0.3s ease;
+    margin: 0;
 }
 
 #successScreen .code-text {
@@ -168,7 +172,7 @@ h1, .loading-text {
 .separator {
     font-size: 34px;
     color: #666;
-    margin: 0 40px;
+    margin: 0 20px;
     line-height: 1;
     display: flex;
     align-items: center;
@@ -177,7 +181,7 @@ h1, .loading-text {
 
 /* Success screen specific separator with reduced margin */
 #successScreen .separator {
-    margin: 0 16px;
+    margin: 0 12px;
     font-size: 34px;
     transition: none;
 }
@@ -200,7 +204,7 @@ h1, .loading-text {
     font-family: 'Roboto Mono', monospace;
     font-size: 30px;
     font-weight: 500;
-    margin: 0 6px;
+    margin: 0;
     letter-spacing: -0.01em;
     padding: 0;
     line-height: 1;
@@ -432,7 +436,6 @@ nav {
         width: 36px;
         height: 44px;
         font-size: 24px;
-        margin: 0 4px;
     }
 
     .code-text, .separator, .character-input {
@@ -440,12 +443,12 @@ nav {
     }
 
     .separator {
+        margin: 0 8px;
         font-size: 28px;
-        margin: 0 16px;
     }
 
     #successScreen .separator {
-        margin: 0 12px;
+        margin: 0 6px;
         font-size: 24px;
     }
 
@@ -494,6 +497,21 @@ nav {
         height: 48px;
         margin-bottom: 16px;
     }
+
+    .loading-overlay .verification-container {
+        margin-top: 10px;
+    }
+    
+    .animation-container {
+        margin-bottom: 30px;
+    }
+
+    .code-row {
+        max-width: 100%;
+        width: 100%;
+        min-height: 60px;
+        gap: 4px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -502,7 +520,7 @@ nav {
     }
 
     .verification-container.active {
-        padding: 0 16px 80px;
+        padding: 0 16px 350px;
     }
 
     .code-text {
@@ -513,7 +531,6 @@ nav {
         width: 32px;
         height: 40px;
         font-size: 20px;
-        margin: 0 3px;
     }
 
     .code-text, .separator, .character-input {
@@ -521,12 +538,12 @@ nav {
     }
 
     .separator {
+        margin: 0 6px;
         font-size: 24px;
-        margin: 0 8px;
     }
 
     #successScreen .separator {
-        margin: 0 8px;
+        margin: 0 4px;
         font-size: 20px;
     }
 
@@ -589,6 +606,20 @@ nav {
         visibility: visible;
     } 
 
+    .loading-overlay .verification-container {
+        margin-top: 5px;
+    }
+    
+    .animation-container {
+        margin-bottom: 20px;
+    }
+
+    .code-row {
+        max-width: 100%;
+        width: 100%;
+        min-height: 50px;
+        gap: 3px;
+    }
 }
 
 .animation-container {
@@ -618,6 +649,7 @@ nav {
 .loading-overlay .verification-container {
     position: relative;
     visibility: visible;
+    margin-top: 20px;
 }
 
 #addressVerification {
